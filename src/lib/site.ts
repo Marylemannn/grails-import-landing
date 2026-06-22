@@ -20,13 +20,13 @@ export const navItems = [
 ] as const;
 
 export const legalNavItems = [
-  { label: "Политика конфиденциальности", href: "/legal#privacy" },
-  { label: "Пользовательское соглашение", href: "/legal#terms" },
+  { label: "Политика конфиденциальности", href: "/legal/privacy" },
+  { label: "Пользовательское соглашение", href: "/legal/terms" },
 ] as const;
 
 export const footerLegalLinks = [
-  { label: "Политика конфиденциальности", href: "/legal#privacy" },
-  { label: "Пользовательское соглашение", href: "/legal#terms" },
+  { label: "Политика конфиденциальности", href: "/legal/privacy" },
+  { label: "Пользовательское соглашение", href: "/legal/terms" },
 ] as const;
 
 export const stats = [

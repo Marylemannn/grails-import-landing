@@ -52,11 +52,11 @@ export function SectionIntro({
 }) {
   return (
     <div className={className}>
-      <p className="mb-3 text-[20px] font-semibold leading-none text-[#91979e]">
+      <p className="mb-3 text-[20px] font-semibold leading-none text-[#91979e] max-sm:mb-2 max-sm:text-[17px]">
         {eyebrow}
       </p>
       <h2
-        className={`max-w-[1120px] text-[35px] font-semibold leading-[1.08] tracking-normal text-black ${titleClassName}`}
+        className={`max-w-[1120px] text-[35px] font-semibold leading-[1.08] tracking-normal text-black max-sm:leading-[1.12] ${titleClassName}`}
         id={headingId}
       >
         {title}

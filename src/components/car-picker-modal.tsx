@@ -196,7 +196,7 @@ export function CarPickerModal({
 
   const modal = isOpen ? (
     <div
-      className={`fixed inset-0 z-[1000] flex items-center justify-center bg-black/60 px-5 py-8 ${
+      className={`fixed inset-0 z-[1000] flex items-center justify-center bg-black/60 px-5 py-8 max-sm:px-4 max-sm:py-5 ${
         isClosing ? "modal-overlay-exit" : "modal-overlay-enter"
       }`}
       role="presentation"
@@ -209,23 +209,23 @@ export function CarPickerModal({
       <div
         aria-labelledby="car-picker-modal-title"
         aria-modal="true"
-        className={`relative w-full max-w-[640px] rounded-[20px] bg-white px-[58px] pb-[40px] pt-[38px] text-ink shadow-[0_24px_80px_rgba(0,0,0,0.34)] max-md:max-h-[calc(100vh-48px)] max-md:overflow-y-auto max-md:max-w-[560px] max-md:px-8 max-md:pb-8 max-md:pt-10 max-sm:px-5 ${
+        className={`relative w-full max-w-[640px] rounded-[20px] bg-white px-[58px] pb-[40px] pt-[38px] text-ink shadow-[0_24px_80px_rgba(0,0,0,0.34)] max-md:max-h-[calc(100vh-48px)] max-md:overflow-y-auto max-md:max-w-[560px] max-md:px-8 max-md:pb-8 max-md:pt-10 max-sm:max-h-[calc(100vh-128px)] max-sm:w-[min(100%,340px)] max-sm:rounded-[15px] max-sm:px-[18px] max-sm:pb-5 max-sm:pt-6 ${
           isClosing ? "modal-panel-exit" : "modal-panel-enter"
         }`}
         role="dialog"
       >
         <button
           aria-label="Закрыть форму"
-          className="absolute right-6 top-6 inline-flex h-10 w-10 items-center justify-center rounded-full text-[#6d747c] transition hover:bg-slate-100 hover:text-black focus:outline-none focus-visible:ring-4 focus-visible:ring-black/10 max-sm:right-4 max-sm:top-4"
+          className="absolute right-6 top-6 inline-flex h-10 w-10 items-center justify-center rounded-full text-[#6d747c] transition hover:bg-slate-100 hover:text-black focus:outline-none focus-visible:ring-4 focus-visible:ring-black/10 max-sm:right-3 max-sm:top-3 max-sm:h-8 max-sm:w-8"
           type="button"
           ref={closeButtonRef}
           onClick={closeModal}
         >
-          <X aria-hidden="true" className="h-8 w-8 stroke-[1.8]" />
+          <X aria-hidden="true" className="h-8 w-8 stroke-[1.8] max-sm:h-6 max-sm:w-6" />
         </button>
 
         <h2
-          className="mx-auto max-w-[460px] text-center text-[31px] font-semibold leading-[1.22] tracking-normal max-md:text-[29px] max-sm:text-[26px]"
+          className="mx-auto max-w-[460px] text-center text-[31px] font-semibold leading-[1.22] tracking-normal max-md:text-[29px] max-sm:max-w-[280px] max-sm:text-[21px] max-sm:leading-[1.18]"
           id="car-picker-modal-title"
         >
           Подберём авто из Кореи
@@ -233,16 +233,16 @@ export function CarPickerModal({
           под ваш запрос
         </h2>
 
-        <form className="mt-[34px] space-y-[19px] max-sm:mt-8" onSubmit={handleSubmit}>
+        <form className="mt-[34px] space-y-[19px] max-sm:mt-6 max-sm:space-y-[13px]" onSubmit={handleSubmit}>
           <div>
             <label
-              className="mb-[10px] block text-[17px] font-light text-[#737b85]"
+              className="mb-[10px] block text-[17px] font-light text-[#737b85] max-sm:mb-2 max-sm:text-[14px]"
               htmlFor="car-picker-phone"
             >
               Номер телефона
             </label>
             <input
-              className="h-[58px] w-full rounded-[15px] border border-[#d9dfe6] bg-white px-6 text-[21px] font-light text-ink outline-none transition placeholder:text-[#99a3ad] focus:border-[1.5px] focus:border-black focus:ring-4 focus:ring-black/5 max-sm:h-[58px] max-sm:px-5 max-sm:text-[20px]"
+              className="h-[58px] w-full rounded-[15px] border border-[#d9dfe6] bg-white px-6 text-[21px] font-light text-ink outline-none transition placeholder:text-[#99a3ad] focus:border-[1.5px] focus:border-black focus:ring-4 focus:ring-black/5 max-sm:h-[46px] max-sm:rounded-[12px] max-sm:px-4 max-sm:text-[17px]"
               id="car-picker-phone"
               inputMode="tel"
               name="phone"
@@ -258,17 +258,17 @@ export function CarPickerModal({
           </div>
 
           <fieldset>
-            <legend className="mb-[12px] text-[17px] font-light text-[#737b85]">
+            <legend className="mb-[12px] text-[17px] font-light text-[#737b85] max-sm:mb-2 max-sm:text-[14px]">
               Как связаться?
             </legend>
-            <div className="grid grid-cols-4 gap-[14px] max-md:grid-cols-2 max-sm:grid-cols-1">
+            <div className="grid grid-cols-4 gap-[14px] max-md:grid-cols-2 max-sm:grid-cols-1 max-sm:gap-[9px]">
               {contactMethods.map((method) => {
                 const isSelected = contactMethod === method.id;
 
                 return (
                   <button
                     aria-pressed={isSelected}
-                    className={`inline-flex h-[58px] items-center justify-center gap-[10px] rounded-[14px] bg-white px-3 text-[16px] font-medium transition hover:border-black hover:shadow-[0_8px_20px_rgba(20,26,33,0.08)] ${
+                    className={`inline-flex h-[58px] items-center justify-center gap-[10px] rounded-[14px] bg-white px-3 text-[16px] font-medium transition hover:border-black hover:shadow-[0_8px_20px_rgba(20,26,33,0.08)] max-sm:h-[44px] max-sm:rounded-[11px] max-sm:text-[15px] ${
                       isSelected
                         ? "border-[1.5px] border-black text-black shadow-[0_10px_24px_rgba(20,26,33,0.08)]"
                         : "border border-[#d9dfe6] text-[#151515]"
@@ -284,7 +284,7 @@ export function CarPickerModal({
                     <Image
                       alt=""
                       aria-hidden="true"
-                      className="h-[18px] w-[18px] shrink-0 object-contain"
+                      className="h-[18px] w-[18px] shrink-0 object-contain max-sm:h-4 max-sm:w-4"
                       src={method.icon}
                     />
                     <span>{method.label}</span>
@@ -295,14 +295,14 @@ export function CarPickerModal({
           </fieldset>
 
           <button
-            className="mt-[29px] flex h-[64px] w-full items-center justify-center rounded-[16px] bg-ink px-6 text-[23px] font-medium text-white transition hover:scale-[1.01] hover:bg-black focus:outline-none focus:ring-4 focus:ring-black/15 max-sm:h-[64px] max-sm:text-[22px]"
+            className="mt-[29px] flex h-[64px] w-full items-center justify-center rounded-[16px] bg-ink px-6 text-[23px] font-medium text-white transition hover:scale-[1.01] hover:bg-black focus:outline-none focus:ring-4 focus:ring-black/15 max-sm:mt-5 max-sm:h-[50px] max-sm:rounded-[12px] max-sm:text-[18px]"
             disabled={submitStatus === "sending"}
             type="submit"
           >
             {submitStatus === "sending" ? "Отправляем..." : "Оставить заявку"}
           </button>
 
-          <p className="mx-auto max-w-[350px] text-center text-[15px] font-light leading-[1.35] text-[#8d96a0]">
+          <p className="mx-auto max-w-[350px] text-center text-[15px] font-light leading-[1.35] text-[#8d96a0] max-sm:max-w-[250px] max-sm:text-[12px]">
             Нажимая на кнопку вы соглашаетесь
             <br />
             с политикой конфиденциальности

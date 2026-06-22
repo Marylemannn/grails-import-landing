@@ -1,84 +1,65 @@
-import Image from "next/image";
 import { footerLegalLinks } from "@/lib/site";
 
 export function SiteFooter() {
   const footerPhone = "+7 (961) 253-50-00";
 
   return (
-    <footer className="bg-ink pb-7 pt-[54px] text-white" id="contact">
+    <footer className="bg-ink py-9 text-white max-sm:py-8" id="contact">
       <div className="hero-container">
-        <div className="grid grid-cols-[1.3fr_1fr] gap-16 max-lg:grid-cols-1">
-          <div className="flex flex-col">
+        <div className="grid grid-cols-[minmax(280px,1fr)_minmax(430px,1.1fr)_minmax(220px,0.75fr)] gap-10 max-xl:grid-cols-2 max-sm:grid-cols-1 max-sm:gap-7">
+          <div>
             <a
-              className="text-[30px] font-medium uppercase leading-none"
+              className="text-[28px] font-medium uppercase leading-none max-sm:text-[24px]"
               href="#top"
             >
               GRAILS IMPORT
             </a>
-            <p className="mt-6 max-w-[560px] text-[15px] font-light leading-[1.45] text-white/45">
-              Авто из Кореи под ваш запрос: подберем, проверим и выкупим
-              автомобиль по вашему запросу, с официальным договором и доставим
-              под ключ в любую точку России
+            <p className="mt-4 max-w-[430px] text-[14px] font-light leading-[1.45] text-white/45 max-sm:mt-4 max-sm:text-[13px] max-sm:leading-[1.35]">
+              Подбор, проверка и доставка авто из Кореи под ключ.
             </p>
-            <a
-              aria-label="Перейти в Telegram GRAILS IMPORT"
-              className="mt-6 block w-fit"
-              href="https://t.me/grails_import"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              <Image
-                aria-hidden="true"
-                alt=""
-                className="h-auto w-6 brightness-0 invert"
-                height={18}
-                src="/images/tg.svg"
-                width={20}
-              />
-            </a>
-            <div className="mt-auto grid max-w-[620px] grid-cols-[max-content_minmax(300px,1fr)] gap-12 pt-20 max-lg:mt-12 max-lg:pt-0 max-sm:grid-cols-1">
-              <div>
-                <p className="text-[20px] font-light text-white/35">Телефон</p>
-                <a
-                  className="mt-6 block text-[20px] font-light"
-                  href={`tel:${footerPhone.replaceAll(" ", "")}`}
-                >
-                  {footerPhone}
-                </a>
-              </div>
-              <div>
-                <p className="text-[20px] font-light text-white/35">Адрес</p>
-                <p className="mt-6 max-w-[320px] text-[20px] font-light leading-tight">
-                  Москва,
-                  <br />
-                  <span className="whitespace-nowrap">
-                    Ленинградский проспект 34А
-                  </span>
-                </p>
-              </div>
+          </div>
+
+          <div className="grid grid-cols-[max-content_minmax(230px,1fr)] gap-10 max-sm:grid-cols-1 max-sm:gap-5">
+            <div>
+              <p className="text-[13px] font-light uppercase leading-none tracking-[0.08em] text-white/35 max-sm:text-[12px]">
+                Телефон
+              </p>
+              <a
+                className="mt-3 block text-[17px] font-light leading-tight transition hover:text-white/70 max-sm:mt-2 max-sm:text-[14px]"
+                href={`tel:${footerPhone.replaceAll(" ", "")}`}
+              >
+                {footerPhone}
+              </a>
+            </div>
+            <div>
+              <p className="text-[13px] font-light uppercase leading-none tracking-[0.08em] text-white/35 max-sm:text-[12px]">
+                Адрес
+              </p>
+              <p className="mt-3 max-w-[220px] text-[17px] font-light leading-tight max-sm:mt-2 max-sm:text-[14px]">
+                Москва, Ленинградский проспект 34А
+              </p>
             </div>
           </div>
 
-          <div className="flex flex-col items-end text-right max-lg:items-start max-lg:text-left">
-            <div className="text-[20px] font-light leading-[1.55]">
-              <p>ИП Дуенин Роман</p>
-              <p>ИНН 0585202293</p>
-              <p>ОГРН 5025483838</p>
-            </div>
-            <nav
-              aria-label="Юридическая информация"
-              className="mt-auto flex flex-col gap-1 pt-28 text-[15px] font-light leading-tight text-white/35 max-lg:pt-12"
-            >
-              {footerLegalLinks.map((link) => (
-                <a className="transition hover:text-white/70" href={link.href} key={link.label}>
-                  {link.label}
-                </a>
-              ))}
-            </nav>
-            <p className="mt-4 text-[15px] font-light text-white/35">
-              © 2022-2026 Все права защищены. GRAILS IMPORT
-            </p>
+          <div className="text-[15px] font-light leading-[1.5] text-white/70 max-xl:col-span-2 max-sm:col-span-1 max-sm:text-[14px]">
+            <p>ИП Дуенин Роман</p>
+            <p className="text-white/35">ИНН 0585202293</p>
+            <p className="text-white/35">ОГРН 5025483838</p>
           </div>
+        </div>
+
+        <div className="mt-8 flex items-center justify-between gap-8 border-t border-white/10 pt-5 text-[13px] font-light leading-tight text-white/35 max-md:flex-col max-md:items-start max-md:gap-4 max-sm:mt-7 max-sm:pt-5 max-sm:text-[12px]">
+          <p>© 2022-2026 GRAILS IMPORT. Все права защищены.</p>
+          <nav
+            aria-label="Юридическая информация"
+            className="flex flex-wrap justify-end gap-x-5 gap-y-2 max-md:justify-start"
+          >
+            {footerLegalLinks.map((link) => (
+              <a className="transition hover:text-white/70" href={link.href} key={link.label}>
+                {link.label}
+              </a>
+            ))}
+          </nav>
         </div>
       </div>
     </footer>

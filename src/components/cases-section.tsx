@@ -2,6 +2,7 @@
 
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
+import type { TouchEvent } from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { caseItems } from "@/lib/site";
 import { SectionIntro } from "./ui";
@@ -15,6 +16,8 @@ export function CasesSection() {
   const [slideStride, setSlideStride] = useState(296);
   const trackRef = useRef<HTMLDivElement>(null);
   const firstCardRef = useRef<HTMLElement>(null);
+  const touchStartRef = useRef<{ x: number; y: number } | null>(null);
+  const touchDeltaRef = useRef({ x: 0, y: 0 });
 
   const measureSlide = useCallback(() => {
     if (!trackRef.current || !firstCardRef.current) {
@@ -53,6 +56,40 @@ export function CasesSection() {
     setActiveIndex((index) => index + 1);
   };
 
+  const handleTouchStart = (event: TouchEvent<HTMLDivElement>) => {
+    const touch = event.touches[0];
+    touchStartRef.current = { x: touch.clientX, y: touch.clientY };
+    touchDeltaRef.current = { x: 0, y: 0 };
+  };
+
+  const handleTouchMove = (event: TouchEvent<HTMLDivElement>) => {
+    if (!touchStartRef.current) {
+      return;
+    }
+
+    const touch = event.touches[0];
+    touchDeltaRef.current = {
+      x: touch.clientX - touchStartRef.current.x,
+      y: touch.clientY - touchStartRef.current.y,
+    };
+  };
+
+  const handleTouchEnd = () => {
+    const { x, y } = touchDeltaRef.current;
+    const isHorizontalSwipe = Math.abs(x) > 48 && Math.abs(x) > Math.abs(y) * 1.35;
+
+    if (isHorizontalSwipe) {
+      if (x < 0) {
+        showNext();
+      } else {
+        showPrevious();
+      }
+    }
+
+    touchStartRef.current = null;
+    touchDeltaRef.current = { x: 0, y: 0 };
+  };
+
   const handleTransitionEnd = () => {
     if (activeIndex >= caseItems.length * 2) {
       setIsAnimating(false);
@@ -66,26 +103,32 @@ export function CasesSection() {
   };
 
   return (
-    <section className="bg-page pb-[76px] pt-[24px] max-lg:pb-14 max-lg:pt-8 max-sm:pt-[82px]" id="cases" aria-labelledby="cases-title">
+    <section className="bg-page pb-[76px] pt-[24px] max-lg:pb-14 max-lg:pt-8 max-sm:pb-8 max-sm:pt-7" id="cases" aria-labelledby="cases-title">
       <div className="hero-container">
         <SectionIntro
           eyebrow="Кейсы"
           headingId="cases-title"
-          titleClassName="!text-[30px]"
+          titleClassName="!text-[30px] max-sm:!text-[28px]"
           title="Наши кейсы расскажут о нас больше, чем мы"
         />
 
-        <div className="relative mt-[50px] max-md:mt-8">
+        <div className="relative mt-[50px] max-md:mt-8 max-sm:mt-6">
           <button
             aria-label="Показать предыдущий кейс"
-            className="absolute left-0 top-1/2 z-30 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white text-black shadow-[0_7px_22px_rgba(24,28,32,0.12)] transition duration-200 hover:shadow-[0_10px_30px_rgba(24,28,32,0.22)] focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/40 max-sm:-left-2"
+            className="absolute left-0 top-1/2 z-30 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white text-black shadow-[0_7px_22px_rgba(24,28,32,0.12)] transition duration-200 hover:shadow-[0_10px_30px_rgba(24,28,32,0.22)] focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/40 max-sm:hidden"
             type="button"
             onClick={showPrevious}
           >
             <ChevronLeft aria-hidden="true" className="h-6 w-6 stroke-[2.2]" />
           </button>
 
-          <div className="-my-20 mx-[60px] overflow-hidden py-20 max-md:mx-10 max-sm:mx-0">
+          <div
+            className="-my-20 mx-[60px] overflow-hidden py-20 max-md:mx-10 max-sm:mx-0 max-sm:touch-pan-y"
+            onTouchCancel={handleTouchEnd}
+            onTouchEnd={handleTouchEnd}
+            onTouchMove={handleTouchMove}
+            onTouchStart={handleTouchStart}
+          >
             <div
               className="flex gap-6 will-change-transform"
               ref={trackRef}
@@ -144,12 +187,32 @@ export function CasesSection() {
 
           <button
             aria-label="Показать следующий кейс"
-            className="absolute right-0 top-1/2 z-30 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white text-black shadow-[0_7px_22px_rgba(24,28,32,0.12)] transition duration-200 hover:shadow-[0_10px_30px_rgba(24,28,32,0.22)] focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/40 max-sm:-right-2"
+            className="absolute right-0 top-1/2 z-30 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white text-black shadow-[0_7px_22px_rgba(24,28,32,0.12)] transition duration-200 hover:shadow-[0_10px_30px_rgba(24,28,32,0.22)] focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/40 max-sm:hidden"
             type="button"
             onClick={showNext}
           >
             <ChevronRight aria-hidden="true" className="h-6 w-6 stroke-[2.2]" />
           </button>
+
+          <div className="mt-4 hidden justify-center gap-4 max-sm:flex">
+            <button
+              aria-label="Показать предыдущий кейс"
+              className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-black shadow-[0_7px_22px_rgba(24,28,32,0.12)] transition duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/40"
+              type="button"
+              onClick={showPrevious}
+            >
+              <ChevronLeft aria-hidden="true" className="h-6 w-6 stroke-[2.2]" />
+            </button>
+
+            <button
+              aria-label="Показать следующий кейс"
+              className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-black shadow-[0_7px_22px_rgba(24,28,32,0.12)] transition duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/40"
+              type="button"
+              onClick={showNext}
+            >
+              <ChevronRight aria-hidden="true" className="h-6 w-6 stroke-[2.2]" />
+            </button>
+          </div>
         </div>
       </div>
     </section>

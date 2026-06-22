@@ -1,8 +1,4 @@
-"use client";
-
-import { useEffect, useState } from "react";
-
-const legalTabs = [
+export const legalDocuments = [
   {
     id: "privacy",
     label: "Политика конфиденциальности",
@@ -67,7 +63,7 @@ const legalTabs = [
   },
   {
     id: "terms",
-    label: "Условия использования",
+    label: "Пользовательское соглашение",
     title: "Пользовательское соглашение",
     text: `1. Общие положения
 
@@ -119,41 +115,24 @@ const legalTabs = [
   },
 ] as const;
 
-type LegalTabId = (typeof legalTabs)[number]["id"];
+export const privacyDocument = legalDocuments[0];
+export const termsDocument = legalDocuments[1];
 
 const sectionTitlePattern = /^\d+\.\s/;
 
-function getHashTab(): LegalTabId {
-  if (typeof window === "undefined") {
-    return "privacy";
-  }
+type LegalDocumentProps = {
+  document: (typeof legalDocuments)[number];
+};
 
-  return window.location.hash === "#terms" ? "terms" : "privacy";
-}
-
-export function LegalDocument() {
-  const [activeTab, setActiveTab] = useState<LegalTabId>("privacy");
-
-  useEffect(() => {
-    const updateActiveTab = () => setActiveTab(getHashTab());
-
-    updateActiveTab();
-    window.addEventListener("hashchange", updateActiveTab);
-
-    return () => window.removeEventListener("hashchange", updateActiveTab);
-  }, []);
-
-  const activeDocument = legalTabs.find((tab) => tab.id === activeTab) ?? legalTabs[0];
-  const documentLines = activeDocument.text.split("\n");
+export function LegalDocument({ document }: LegalDocumentProps) {
+  const documentLines = document.text.split("\n");
 
   return (
-    <section
-      className="hero-container pb-28 pt-16 max-md:pb-20 max-md:pt-10"
-      id={activeDocument.id}
-    >
-      <article className="min-h-[360px] bg-white px-10 py-9 shadow-card max-sm:px-6">
+    <section className="hero-container pb-28 pt-16 max-md:pb-20 max-md:pt-10">
+      <article className="bg-white px-10 py-9 shadow-card max-sm:px-6" id={document.id}>
+        <p className="mb-3 text-[15px] font-light text-muted">{document.label}</p>
         <h1 className="text-[34px] font-medium leading-tight tracking-normal max-sm:text-[28px]">
-          {activeDocument.title}
+          {document.title}
         </h1>
         <div className="mt-7 max-w-[820px] text-[20px] font-light leading-[1.55] text-muted max-sm:text-[17px]">
           {documentLines.map((line, index) => {

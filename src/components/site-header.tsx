@@ -17,8 +17,8 @@ export function SiteHeader({ items = navItems }: SiteHeaderProps) {
   return (
     <header className="bg-ink text-white">
       <div className="border-b border-white/10">
-        <div className="hero-container flex min-h-[50px] items-center justify-between gap-5 py-3 text-[17px] font-light text-white/85 max-[1500px]:min-h-[46px] max-[1500px]:text-[15px] max-md:flex-wrap max-md:justify-center max-md:gap-x-6 max-md:gap-y-2 max-md:py-2 max-sm:text-[13px]">
-          <div className="flex items-center gap-[24px] max-md:gap-4 max-sm:flex-wrap max-sm:justify-center max-sm:gap-y-2">
+        <div className="header-container flex min-h-[50px] items-center justify-between gap-5 py-3 text-[17px] font-light text-white/85 max-[1500px]:min-h-[46px] max-[1500px]:text-[15px] max-md:flex-nowrap max-md:gap-4 max-md:py-2 max-sm:text-[13px]">
+          <div className="flex items-center gap-[24px] max-md:gap-4">
             <a
               className="inline-flex items-center gap-3 whitespace-nowrap transition hover:text-white max-sm:gap-2"
               href="tel:+79612535000"
@@ -34,9 +34,9 @@ export function SiteHeader({ items = navItems }: SiteHeaderProps) {
               <span>+7 (961) 253-50-00</span>
             </a>
 
-            <span className="h-5 w-px bg-white/20 max-sm:hidden" aria-hidden="true" />
+            <span className="h-5 w-px bg-white/20 max-md:hidden" aria-hidden="true" />
 
-            <div className="inline-flex items-center gap-3 whitespace-nowrap max-sm:gap-2">
+            <div className="inline-flex items-center gap-3 whitespace-nowrap max-md:hidden">
               <Image
                 aria-hidden="true"
                 className="h-5 w-5 max-[1500px]:h-[18px] max-[1500px]:w-[18px] max-sm:h-4 max-sm:w-4"
@@ -50,10 +50,11 @@ export function SiteHeader({ items = navItems }: SiteHeaderProps) {
             </div>
           </div>
 
-          <div className="flex items-center gap-[24px] max-md:gap-4 max-sm:flex-wrap max-sm:justify-center max-sm:gap-y-2">
+          <div className="flex items-center gap-[24px] max-md:gap-4 max-sm:gap-3">
             <a
               className="inline-flex items-center gap-3 whitespace-nowrap transition hover:text-white max-sm:gap-2"
               href={siteConfig.managerTelegramUrl}
+              aria-label="Написать в Telegram"
               rel="noopener noreferrer"
               target="_blank"
             >
@@ -65,7 +66,7 @@ export function SiteHeader({ items = navItems }: SiteHeaderProps) {
                 width={23}
                 height={20}
               />
-              <span>Telegram</span>
+              <span className="max-sm:sr-only">Telegram</span>
             </a>
 
             <span className="h-5 w-px bg-white/20 max-sm:hidden" aria-hidden="true" />
@@ -73,6 +74,7 @@ export function SiteHeader({ items = navItems }: SiteHeaderProps) {
             <a
               className="inline-flex items-center gap-3 whitespace-nowrap transition hover:text-white max-sm:gap-2"
               href="https://wa.me/79612535000"
+              aria-label="Написать в WhatsApp"
               rel="noopener noreferrer"
               target="_blank"
             >
@@ -84,16 +86,16 @@ export function SiteHeader({ items = navItems }: SiteHeaderProps) {
                 width={22}
                 height={22}
               />
-              <span>WhatsApp</span>
+              <span className="max-sm:sr-only">WhatsApp</span>
             </a>
           </div>
         </div>
       </div>
 
-      <div className="h-[72px] max-[1500px]:h-[64px]">
-        <div className="hero-container flex h-full items-center justify-between">
+      <div className="h-[72px] max-[1500px]:h-[64px] max-sm:h-[54px]">
+        <div className="header-container flex h-full items-center justify-between">
           <Link
-            className="whitespace-nowrap text-[30px] font-medium uppercase tracking-normal max-[1500px]:text-[24px] max-[1320px]:text-[23px]"
+            className="whitespace-nowrap text-[30px] font-medium uppercase tracking-normal max-[1500px]:text-[24px] max-[1320px]:text-[23px] max-sm:text-[17px]"
             href="/"
             aria-label="GRAILS IMPORT, перейти на главную страницу"
           >
@@ -116,7 +118,7 @@ export function SiteHeader({ items = navItems }: SiteHeaderProps) {
           </nav>
 
           <CarPickerModal
-            buttonClassName="!h-[43px] !gap-[14px] !bg-white px-[26px] !text-[20px] !font-normal !text-ink hover:scale-105 hover:!bg-slate-100 max-[1500px]:!h-[40px] max-[1500px]:!gap-[12px] max-[1500px]:px-[24px] max-[1500px]:!text-[17px] max-[1320px]:px-[22px] max-[1320px]:!text-[16px]"
+            buttonClassName="!h-[43px] !gap-[14px] !bg-white px-[26px] !text-[20px] !font-normal !text-ink hover:scale-105 hover:!bg-slate-100 max-[1500px]:!h-[40px] max-[1500px]:!gap-[12px] max-[1500px]:px-[24px] max-[1500px]:!text-[17px] max-[1320px]:px-[22px] max-[1320px]:!text-[16px] max-sm:!h-[34px] max-sm:!gap-2 max-sm:px-4 max-sm:!text-[13px]"
           >
             <span className="whitespace-nowrap max-sm:hidden">Связаться с нами</span>
             <span className="sm:hidden">Связаться</span>

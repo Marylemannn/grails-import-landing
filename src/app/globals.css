@@ -23,6 +23,7 @@
 
 html {
   scroll-behavior: smooth;
+  background: var(--page);
 }
 
 body {
@@ -37,6 +38,7 @@ body {
 
 .site-scale {
   min-height: 100vh;
+  background: var(--page);
 }
 
 a {
@@ -132,6 +134,11 @@ summary::-webkit-details-marker {
     margin-inline: auto;
   }
 
+  .header-container {
+    width: min(calc(100% - 208px), 1218px);
+    margin-inline: auto;
+  }
+
   .guarantee-container {
     width: min(calc(100% - 208px), 1452px);
     margin-inline: auto;
@@ -204,6 +211,10 @@ summary::-webkit-details-marker {
       width: min(calc(100% - 88px), 1218px);
     }
 
+    .header-container {
+      width: min(calc(100% - 88px), 1218px);
+    }
+
     .guarantee-container {
       width: min(calc(100% - 88px), 1452px);
     }
@@ -215,19 +226,62 @@ summary::-webkit-details-marker {
 
   @media (max-width: 640px) {
     .site-container {
-      width: min(calc(100% - 72px), 1412px);
+      width: min(calc(100% - 32px), 1412px);
     }
 
     .hero-container {
-      width: min(calc(100% - 72px), 1218px);
+      width: min(calc(100% - 32px), 1218px);
+    }
+
+    .header-container {
+      width: min(calc(100% - 32px), 1218px);
     }
 
     .guarantee-container {
-      width: min(calc(100% - 72px), 1452px);
+      width: min(calc(100% - 32px), 1452px);
+    }
+
+    .process-route-container {
+      width: min(calc(100% - 32px), 1218px);
     }
   }
 
+  @media (max-width: 640px) {
+    .process-mobile-timeline {
+      position: relative;
+    }
+
+    .process-mobile-timeline::before {
+      content: "";
+      position: absolute;
+      left: 18px;
+      top: 18px;
+      bottom: 18px;
+      width: 1px;
+      background: #cfd6dd;
+    }
+
+    .process-mobile-step {
+      position: relative;
+    }
+
+    .process-mobile-step:last-child {
+      padding-bottom: 0;
+    }
+
+  }
+
   @media (max-width: 767px) {
+    .hero-main {
+      background: linear-gradient(
+        180deg,
+        #e4e5e9 0%,
+        #e4e5e9 46%,
+        #f6f8fa 78%,
+        #f6f8fa 100%
+      );
+    }
+
     .hero-visual-layer {
       z-index: 0;
     }
@@ -239,49 +293,83 @@ summary::-webkit-details-marker {
     .hero-car-layer {
       left: 50% !important;
       right: auto !important;
-      top: 320px !important;
-      width: min(760px, 195vw);
-      height: 428px !important;
-      transform: translateX(calc(-50% + 60px));
+      top: 178px !important;
+      width: min(760px, 206vw);
+      height: 420px !important;
+      transform: translateX(calc(-50% + 126px));
     }
 
     .hero-car-layer::before {
       content: "";
       position: absolute;
-      inset: 0 0 auto;
+      inset: auto -24px -2px;
       z-index: 1;
-      height: 190px;
+      height: 112px;
       background: linear-gradient(
         180deg,
-        #f6f8fa 0%,
-        #f6f8fa 22%,
-        rgba(246, 248, 250, 0.96) 42%,
-        rgba(246, 248, 250, 0.76) 68%,
-        rgba(246, 248, 250, 0) 100%
+        rgba(246, 248, 250, 0) 0%,
+        rgba(246, 248, 250, 0.42) 48%,
+        rgba(246, 248, 250, 0.86) 78%,
+        #f6f8fa 100%
+      );
+      pointer-events: none;
+    }
+
+    .hero-car-layer::after {
+      content: "";
+      position: absolute;
+      inset: 0 -24px auto;
+      z-index: 1;
+      height: 150px;
+      background: linear-gradient(
+        180deg,
+        #e4e5e9 0%,
+        rgba(228, 229, 233, 0.86) 30%,
+        rgba(228, 229, 233, 0.34) 66%,
+        rgba(228, 229, 233, 0) 100%
       );
       pointer-events: none;
     }
 
     .hero-car-image {
       object-position: center top !important;
-      opacity: 0.82 !important;
+      opacity: 1 !important;
     }
 
     .hero-fade {
-      height: 360px !important;
+      height: 300px !important;
       background: linear-gradient(
         180deg,
-        #f6f8fa 0%,
-        rgba(246, 248, 250, 0.88) 36%,
-        rgba(246, 248, 250, 0.28) 62%,
-        rgba(246, 248, 250, 0) 100%
+        #e4e5e9 0%,
+        rgba(228, 229, 233, 0.86) 38%,
+        rgba(228, 229, 233, 0.28) 64%,
+        rgba(228, 229, 233, 0) 100%
       ) !important;
     }
 
     .hero-stats {
       position: relative;
       z-index: 2;
-      margin-top: 320px !important;
+      margin-top: 254px !important;
+    }
+
+    .hero-stats > div {
+      border-bottom: 1px solid #d8dde2;
+    }
+
+    .hero-stats > div:nth-child(3),
+    .hero-stats > div:nth-child(4) {
+      border-bottom: 0;
+    }
+
+    .hero-stats > div:nth-child(odd)::after {
+      content: "";
+      position: absolute;
+      top: 12px;
+      right: 0;
+      bottom: 12px;
+      width: 1px;
+      background: #d8dde2;
     }
   }
 }
