@@ -88,7 +88,6 @@ function buildTelegramMessage(payload: Required<Pick<LeadPayload, "phone">> & {
   appendField(lines, "utm_content", payload.attribution?.utm_content);
   appendField(lines, "utm_term", payload.attribution?.utm_term);
   appendField(lines, "Referrer", payload.attribution?.referrer);
-  appendField(lines, "Страница заявки", payload.attribution?.currentPage);
   appendField(lines, "Первый визит", formatMoscowDateTime(payload.attribution?.firstVisitAt));
   appendField(lines, "Количество визитов", payload.attribution?.visitCount);
   appendField(lines, "Первый источник UTM", payload.attribution?.firstUtmSource);
