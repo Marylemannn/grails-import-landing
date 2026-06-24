@@ -43,8 +43,8 @@ export function SiteFooter() {
 
           <div className="text-[15px] font-light leading-[1.5] text-white/70 max-xl:col-span-2 max-sm:col-span-1 max-sm:text-[14px]">
             <p>ИП Дуенин Роман</p>
-            <p className="text-white/35">ИНН 0585202293</p>
-            <p className="text-white/35">ОГРН 5025483838</p>
+            <p className="text-white/35">ИНН 331903286102</p>
+            <p className="text-white/35">ОГРНИП 323330000069149</p>
           </div>
         </div>
 

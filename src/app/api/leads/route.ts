@@ -32,11 +32,34 @@ function sanitizeText(value: unknown, maxLength = 500) {
 }
 
 function appendField(lines: string[], label: string, value: unknown) {
-  const safeValue = sanitizeText(value);
+  const safeValue =
+    typeof value === "number" && Number.isFinite(value)
+      ? String(value)
+      : sanitizeText(value);
 
   if (safeValue) {
     lines.push(`${label}: ${safeValue}`);
   }
+}
+
+function formatMoscowDateTime(value: unknown) {
+  const safeValue = sanitizeText(value);
+
+  if (!safeValue) {
+    return "";
+  }
+
+  const date = new Date(safeValue);
+
+  if (Number.isNaN(date.getTime())) {
+    return safeValue;
+  }
+
+  return new Intl.DateTimeFormat("ru-RU", {
+    dateStyle: "short",
+    timeStyle: "medium",
+    timeZone: "Europe/Moscow",
+  }).format(date);
 }
 
 function buildTelegramMessage(payload: Required<Pick<LeadPayload, "phone">> & {
@@ -65,7 +88,14 @@ function buildTelegramMessage(payload: Required<Pick<LeadPayload, "phone">> & {
   appendField(lines, "utm_content", payload.attribution?.utm_content);
   appendField(lines, "utm_term", payload.attribution?.utm_term);
   appendField(lines, "Referrer", payload.attribution?.referrer);
-  appendField(lines, "Первый визит", payload.attribution?.firstVisitAt);
+  appendField(lines, "Страница заявки", payload.attribution?.currentPage);
+  appendField(lines, "Первый визит", formatMoscowDateTime(payload.attribution?.firstVisitAt));
+  appendField(lines, "Количество визитов", payload.attribution?.visitCount);
+  appendField(lines, "Первый источник UTM", payload.attribution?.firstUtmSource);
+  appendField(lines, "Последний источник UTM", payload.attribution?.lastUtmSource);
+
+  lines.push("", "Устройство:");
+  appendField(lines, "Тип устройства", payload.attribution?.device?.type);
 
   return lines.join("\n");
 }

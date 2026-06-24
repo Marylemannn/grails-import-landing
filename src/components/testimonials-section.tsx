@@ -11,32 +11,34 @@ const testimonials = [
     id: "testimonial-1",
     name: "Сергей",
     car: "MB GLE",
-    details: "53 КАКОЙ ГОД - 10.000 KM",
-    videoSrc: "/images/video1.mp4",
-    poster: "/images/video1-poster.jpg",
-  },
-  {
-    id: "testimonial-2",
-    name: "Роман",
-    car: "BMW X5",
-    details: "Restyling 2025 - 10.000 км",
-    videoSrc: "/images/video2.mp4",
-    poster: "/images/video2-poster.jpg",
+    details: "53 2021",
+    videoSrc: "/images/testimonials/sergey-mb-gle.mp4",
+    poster: "/images/testimonials/sergey-mb-gle.jpg",
   },
   {
     id: "testimonial-3",
     name: "Роман",
     car: "BMW X5",
     title: "Андрей - MB S-class",
-    details: "450 W223 2021 - 37.000 км",
-    videoSrc: "/андрей.mp4",
-    poster: "/images/testimonial-andrey-poster.jpg",
+    details: "450 W223 2021",
+    videoSrc: "/images/testimonials/andrey-mb-s-class.mp4",
+    poster: "/images/testimonials/andrey-mb-s-class.jpg",
+  },
+  {
+    id: "testimonial-2",
+    name: "Роман",
+    car: "Porsche 718",
+    details: "2017",
+    videoSrc: "/images/testimonials/roman-porsche-718.mp4",
+    poster: "/images/testimonials/roman-porsche-718.jpg",
   },
   {
     id: "testimonial-4",
-    name: "Роман",
-    car: "BMW X5",
-    details: "Restyling 2025 - 10.000 км",
+    name: "Туе",
+    car: "Lexus RX300",
+    details: "2021",
+    videoSrc: "/images/testimonials/tue-lexus-rx300.mp4",
+    poster: "/images/testimonials/tue-lexus-rx300.jpg",
   },
 ] as const;
 
@@ -51,7 +53,9 @@ const TestimonialCard = forwardRef<
   }
 >(function TestimonialCard({ item, className = "" }, ref) {
   const isVideo = "videoSrc" in item;
+  const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
   const title = "title" in item ? item.title : `${item.name} - ${item.car}`;
+  const poster = isVideo && "poster" in item ? item.poster : undefined;
 
   return (
     <article
@@ -59,16 +63,36 @@ const TestimonialCard = forwardRef<
       ref={ref}
     >
       {isVideo ? (
-        <video
-          aria-label={`Видео отзыв: ${title}`}
-          className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
-          controls
-          playsInline
-          poster={item.poster}
-          preload="none"
-        >
-          <source src={item.videoSrc} type="video/mp4" />
-        </video>
+        shouldLoadVideo ? (
+          <video
+            aria-label={`Видео отзыв: ${title}`}
+            autoPlay
+            className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+            controls
+            playsInline
+            poster={poster}
+            preload="metadata"
+            src={item.videoSrc}
+          />
+        ) : (
+          <>
+            <Image
+              alt={`Видео отзыв: ${title}`}
+              className="object-cover transition duration-500 group-hover:scale-[1.03]"
+              fill
+              sizes="(max-width: 640px) calc(100vw - 72px), (max-width: 768px) 100vw, (max-width: 1024px) 45vw, 315px"
+              src={item.poster}
+            />
+            <button
+              aria-label={`Воспроизвести видео отзыв: ${title}`}
+              className="absolute left-1/2 top-1/2 z-10 flex h-[54px] w-[54px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white/55 text-white shadow-[0_10px_26px_rgba(0,0,0,0.18)] backdrop-blur-[1px] transition duration-200 hover:bg-white/70 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
+              type="button"
+              onClick={() => setShouldLoadVideo(true)}
+            >
+              <Play aria-hidden="true" className="ml-1 h-[28px] w-[28px] fill-current stroke-0" />
+            </button>
+          </>
+        )
       ) : (
         <Image
           alt={`Видео отзыв: ${title}`}

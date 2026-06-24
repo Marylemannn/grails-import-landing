@@ -3,7 +3,7 @@ export const siteConfig = {
   title: "GRAILS IMPORT - авто из Кореи под ключ",
   description:
     "Подбор, проверка, выкуп и доставка автомобилей из Южной Кореи под ключ с договором, расчетом стоимости и фото/видео отчетами на каждом этапе.",
-  url: process.env.NEXT_PUBLIC_SITE_URL || "https://grails-import.ru",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://grailsimport.ru",
   email: "nkpiml@mkdm.ru",
   phone: "+7 (961) 253-50-00",
   address: "Москва, где-то там тут",
@@ -51,7 +51,7 @@ export const stats = [
 export const caseItems = [
   {
     title: "AUDI Q8",
-    description: "55 TFSI 2022 - 10.000 КМ",
+    description: "55 TFSI 2022",
     image: "/images/audi-more.jpg",
     imagePosition: "50% 50%",
     alt: "Audi из Кореи",
@@ -59,7 +59,7 @@ export const caseItems = [
   },
   {
     title: "MB GLE",
-    description: " 53 КАКОЙ ГОД - 10.000 КМ",
+    description: "53 2021",
     image: "/images/mb-gle-white.jpg",
     imagePosition: "50% 50%",
     alt: "Белый Mercedes-Benz GLE из Кореи",
@@ -67,7 +67,7 @@ export const caseItems = [
   },
   {
     title: "Porsche 718",
-    description: " КАКОЙ ГОД - 10.000 КМ",
+    description: "2017",
     image: "/images/porsche-718.jpg",
     imagePosition: "50% 50%",
     alt: "Porsche 718 из Кореи",
@@ -75,7 +75,7 @@ export const caseItems = [
   },
   {
     title: "MB CLS",
-    description: " 53 AMG 2023 - 10.000 КМ",
+    description: "53 AMG 2023",
     image: "/images/mb-cls-main.jpg",
     imagePosition: "50% 50%",
     alt: "Mercedes-Benz CLS из Кореи",
@@ -83,7 +83,7 @@ export const caseItems = [
   },
   {
     title: "Audi A6",
-    description: "35 TFSI КАКОЙ ГОД - 10.000 КМ",
+    description: "35 TFSI 2021",
     image: "/images/audi-a6.jpg",
     imagePosition: "50% 50%",
     alt: "Audi A6 из Кореи",
@@ -91,7 +91,7 @@ export const caseItems = [
   },
   {
     title: "BMW 320d",
-    description: " КАКОЙ ГОД - 10.000 КМ",
+    description: "2022",
     image: "/images/bmw-320d.jpg",
     imagePosition: "50% 50%",
     alt: "BMW 320d из Кореи",

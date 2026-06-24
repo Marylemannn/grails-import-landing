@@ -1,4 +1,5 @@
 const attributionStorageKey = "grailsLeadAttribution";
+const visitSessionStorageKey = "grailsLeadVisitCaptured";
 
 const utmKeys = [
   "utm_source",
@@ -18,6 +19,20 @@ export type LeadAttribution = {
   landingPage?: string;
   currentPage?: string;
   firstVisitAt?: string;
+  visitCount?: number;
+  firstUtmSource?: string;
+  lastUtmSource?: string;
+  device?: LeadDeviceInfo;
+};
+
+export type LeadDeviceInfo = {
+  type?: string;
+};
+
+type NavigatorWithUserAgentData = Navigator & {
+  userAgentData?: {
+    mobile?: boolean;
+  };
 };
 
 function readStoredAttribution(): LeadAttribution {
@@ -38,6 +53,61 @@ function writeStoredAttribution(attribution: LeadAttribution) {
   }
 }
 
+function formatUtmSource(attribution: LeadAttribution) {
+  return utmKeys
+    .map((key) => {
+      const value = attribution[key];
+
+      return value ? `${key}=${value}` : "";
+    })
+    .filter(Boolean)
+    .join(", ");
+}
+
+function shouldCountVisit() {
+  try {
+    if (window.sessionStorage.getItem(visitSessionStorageKey)) {
+      return false;
+    }
+
+    window.sessionStorage.setItem(visitSessionStorageKey, "1");
+  } catch {
+    return true;
+  }
+
+  return true;
+}
+
+function detectDeviceType(userAgent: string, userAgentDataMobile?: boolean) {
+  const normalizedUserAgent = userAgent.toLowerCase();
+
+  if (
+    /ipad|tablet|playbook|silk/.test(normalizedUserAgent) ||
+    (/android/.test(normalizedUserAgent) && !/mobile/.test(normalizedUserAgent)) ||
+    (/macintosh/.test(normalizedUserAgent) && navigator.maxTouchPoints > 1)
+  ) {
+    return "Планшет";
+  }
+
+  if (
+    userAgentDataMobile ||
+    /mobi|iphone|ipod|android.*mobile|blackberry|phone/.test(normalizedUserAgent)
+  ) {
+    return "Телефон";
+  }
+
+  return "Компьютер";
+}
+
+function getLeadDeviceInfo(): LeadDeviceInfo {
+  const navigatorWithUserAgentData = navigator as NavigatorWithUserAgentData;
+  const userAgent = navigator.userAgent || "";
+
+  return {
+    type: detectDeviceType(userAgent, navigatorWithUserAgentData.userAgentData?.mobile),
+  };
+}
+
 export function captureLeadAttribution() {
   if (typeof window === "undefined") {
     return;
@@ -45,6 +115,7 @@ export function captureLeadAttribution() {
 
   const url = new URL(window.location.href);
   const storedAttribution = readStoredAttribution();
+  const isNewVisit = shouldCountVisit();
   const utmAttribution = utmKeys.reduce<LeadAttribution>((accumulator, key) => {
     const value = url.searchParams.get(key);
 
@@ -55,10 +126,7 @@ export function captureLeadAttribution() {
     return accumulator;
   }, {});
   const hasUtmAttribution = Object.keys(utmAttribution).length > 0;
-
-  if (storedAttribution.firstVisitAt && !hasUtmAttribution) {
-    return;
-  }
+  const currentUtmSource = hasUtmAttribution ? formatUtmSource(utmAttribution) : "";
 
   writeStoredAttribution({
     ...storedAttribution,
@@ -66,6 +134,11 @@ export function captureLeadAttribution() {
     referrer: storedAttribution.referrer || document.referrer || "direct",
     landingPage: storedAttribution.landingPage || url.href,
     firstVisitAt: storedAttribution.firstVisitAt || new Date().toISOString(),
+    visitCount: (storedAttribution.visitCount || 0) + (isNewVisit ? 1 : 0),
+    firstUtmSource:
+      storedAttribution.firstUtmSource || currentUtmSource || undefined,
+    lastUtmSource:
+      currentUtmSource || storedAttribution.lastUtmSource || undefined,
   });
 }
 
@@ -77,5 +150,6 @@ export function getLeadAttribution(): LeadAttribution {
   return {
     ...readStoredAttribution(),
     currentPage: window.location.href,
+    device: getLeadDeviceInfo(),
   };
 }
