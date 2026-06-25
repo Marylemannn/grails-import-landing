@@ -37,13 +37,45 @@ export const siteConfig = {
   ],
 };
 
-export const navItems = [
-  { label: "Кейсы", href: "#cases" },
-  { label: "Процесс", href: "#process" },
-  { label: "Стоимость", href: "#price" },
-  { label: "Отзывы", href: "#reviews" },
-  { label: "Вопросы", href: "#faq" },
+export const pageSections = [
+  {
+    id: "cases",
+    label: "Кейсы",
+    href: "/#cases",
+    title: "Кейсы привоза авто из Кореи",
+    description: "Реальные автомобили, которые GRAILS IMPORT подобрал, проверил и доставил клиентам из Кореи.",
+  },
+  {
+    id: "process",
+    label: "Процесс",
+    href: "/#process",
+    title: "Процесс заказа автомобиля из Южной Кореи",
+    description: "Этапы работы: консультация, договор, поиск, осмотр, бронь, доставка, таможня и передача авто.",
+  },
+  {
+    id: "price",
+    label: "Стоимость",
+    href: "/#price",
+    title: "Расчет стоимости авто из Кореи",
+    description: "Онлайн-калькулятор для расчета доставки, таможни, оформления и других расходов под ключ.",
+  },
+  {
+    id: "reviews",
+    label: "Отзывы",
+    href: "/#reviews",
+    title: "Отзывы клиентов GRAILS IMPORT",
+    description: "Видеоотзывы клиентов о подборе, покупке и доставке автомобилей из Кореи.",
+  },
+  {
+    id: "faq",
+    label: "Вопросы",
+    href: "/#faq",
+    title: "Вопросы об импорте авто из Кореи",
+    description: "Ответы на частые вопросы о проверке автомобиля, оплате, сроках доставки и оформлении.",
+  },
 ] as const;
+
+export const navItems = pageSections.map(({ href, label }) => ({ href, label }));
 
 export const legalNavItems = [
   { label: "Политика конфиденциальности", href: "/legal/privacy" },

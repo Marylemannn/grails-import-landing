@@ -149,6 +149,8 @@ export function ProcessSection() {
         <div
           className="relative mt-[60px] min-h-[225px] overflow-hidden rounded-panel bg-ink px-[52px] py-[40px] text-white shadow-card max-2xl:px-9 max-lg:px-8 max-md:min-h-[300px] max-md:rounded-[14px] max-md:px-6 max-md:py-[39px] max-sm:mt-7 max-sm:min-h-0 max-sm:rounded-[12px] max-sm:px-5 max-sm:py-5 max-[360px]:min-h-[273px]"
           id="price"
+          role="region"
+          aria-labelledby="price-title"
         >
           <div className="pointer-events-none absolute top-[-28px] right-[220px] h-[300px] w-[322px] rotate-[13deg] opacity-[0.36] mix-blend-luminosity max-lg:right-[18px] max-lg:opacity-[0.22] max-md:hidden">
             <Image
@@ -163,7 +165,10 @@ export function ProcessSection() {
           </div>
           <div className="relative z-10 flex min-h-[145px] items-center justify-between gap-8 max-2xl:gap-2 max-lg:flex-col max-lg:min-h-[162px] max-lg:items-start max-sm:min-h-0 max-sm:gap-4">
             <div className="relative top-[-24px] max-lg:top-0 max-md:-translate-y-[10px] max-sm:translate-y-0">
-              <h2 className="max-w-[860px] text-[35px] font-medium leading-[1.12] min-[1440px]:whitespace-nowrap max-md:text-[33px] max-sm:text-[22px] max-sm:font-semibold max-sm:leading-[1.12]">
+              <h2
+                className="max-w-[860px] text-[35px] font-medium leading-[1.12] min-[1440px]:whitespace-nowrap max-md:text-[33px] max-sm:text-[22px] max-sm:font-semibold max-sm:leading-[1.12]"
+                id="price-title"
+              >
                 Узнайте стоимость доставки авто за 1 минуту
               </h2>
               <p className="mt-[24px] max-w-[620px] text-[20px] font-light leading-[1.15] text-[#899097] max-md:-translate-y-[10px] max-md:text-[20px] max-sm:mt-2 max-sm:translate-y-0 max-sm:text-[15px] max-sm:leading-[1.25]">

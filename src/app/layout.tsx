@@ -22,6 +22,11 @@ export const metadata: Metadata = {
     email: false,
     telephone: false,
   },
+  icons: {
+    icon: "/favicon.png",
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
+  },
   openGraph: {
     title: siteConfig.title,
     description: siteConfig.description,
@@ -31,10 +36,10 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: `${siteConfig.url}/images/hero-car.png`,
-        width: 4092,
-        height: 3772,
-        alt: "Черный BMW X5 от GRAILS IMPORT",
+        url: `${siteConfig.url}/favicon.png`,
+        width: 3920,
+        height: 3920,
+        alt: "Логотип GRAILS IMPORT",
       },
     ],
   },
@@ -42,7 +47,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteConfig.title,
     description: siteConfig.description,
-    images: [`${siteConfig.url}/images/hero-car.png`],
+    images: [`${siteConfig.url}/favicon.png`],
   },
   robots: {
     index: true,

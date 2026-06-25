@@ -3,6 +3,7 @@ import { FinalCta } from "@/components/final-cta";
 import { CasesSection } from "@/components/cases-section";
 import { Hero } from "@/components/hero";
 import { InfoCardsSection } from "@/components/info-cards-section";
+import { PageSectionLinks } from "@/components/page-section-links";
 import { ProcessSection } from "@/components/process-section";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
@@ -12,6 +13,7 @@ export default function Home() {
   return (
     <>
       <SiteHeader />
+      <PageSectionLinks />
       <main>
         <Hero />
         <CasesSection />
