@@ -72,7 +72,7 @@ export function ProcessSection() {
               aria-hidden="true"
               className="absolute left-[32px] top-[250px] z-20 h-[179px] w-[1160px]"
               height={179}
-              priority
+              loading="lazy"
               src="/images/route-path.svg"
               width={1266}
             />
@@ -82,6 +82,7 @@ export function ProcessSection() {
                 aria-hidden="true"
                 className={`absolute z-10 w-[3px] ${className}`}
                 height={133}
+                loading="lazy"
                 key={className}
                 src="/images/line.svg"
                 width={3}
@@ -95,6 +96,7 @@ export function ProcessSection() {
                 alt="Флаг Южной Кореи"
                 className="ml-[19px] mt-3 h-auto w-[74px]"
                 height={54}
+                loading="lazy"
                 sizes="74px"
                 src="/images/korea-flag.png"
                 width={74}
@@ -108,6 +110,7 @@ export function ProcessSection() {
                 alt="Флаг России"
                 className="relative left-[35px] top-[-5px] mt-3 h-auto w-[74px]"
                 height={49}
+                loading="lazy"
                 sizes="74px"
                 src="/images/russia-flag.png"
                 width={74}
@@ -153,6 +156,7 @@ export function ProcessSection() {
               aria-hidden="true"
               className="object-contain"
               fill
+              loading="lazy"
               sizes="322px"
               src="/images/calculator-block-2.png"
             />

@@ -14,14 +14,14 @@ export function FinalCta() {
               alt=""
               aria-hidden="true"
               className="absolute left-[310px] top-[270px] z-0 h-auto w-[300px] object-contain min-[1440px]:left-[350px] min-[1440px]:top-[265px] min-[1440px]:w-[360px]"
-              priority={false}
+              loading="lazy"
               src={carLight}
             />
             <Image
-              alt="Автомобиль сверху"
+              alt="Автомобиль из Южной Кореи сверху"
               className="z-10 object-contain object-left"
               fill
-              priority={false}
+              loading="lazy"
               sizes="(min-width: 1440px) 860px, 660px"
               src={carTop}
             />

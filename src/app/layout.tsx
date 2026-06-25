@@ -1,25 +1,37 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import "./globals.css";
 import { siteConfig } from "@/lib/site";
 import { StructuredData } from "@/components/structured-data";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
+  applicationName: siteConfig.name,
   title: siteConfig.title,
   description: siteConfig.description,
+  keywords: siteConfig.keywords,
+  authors: [{ name: siteConfig.name }],
+  creator: siteConfig.name,
+  publisher: siteConfig.name,
+  category: "automotive",
   alternates: {
-    canonical: "/",
+    canonical: `${siteConfig.url}/`,
+  },
+  formatDetection: {
+    address: false,
+    email: false,
+    telephone: false,
   },
   openGraph: {
     title: siteConfig.title,
     description: siteConfig.description,
-    url: "/",
+    url: `${siteConfig.url}/`,
     siteName: siteConfig.name,
     locale: "ru_RU",
     type: "website",
     images: [
       {
-        url: "/images/hero-car.png",
+        url: `${siteConfig.url}/images/hero-car.png`,
         width: 4092,
         height: 3772,
         alt: "Черный BMW X5 от GRAILS IMPORT",
@@ -30,11 +42,23 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteConfig.title,
     description: siteConfig.description,
-    images: ["/images/hero-car.png"],
+    images: [`${siteConfig.url}/images/hero-car.png`],
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  other: {
+    "geo.region": "RU-MOW",
+    "geo.placename": "Москва",
+    "og:locale:alternate": "ru_RU",
   },
 };
 
@@ -52,6 +76,28 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <body>
+        <Script id="yandex-metrika" strategy="afterInteractive">
+          {`
+            (function(m,e,t,r,i,k,a){
+                m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+                m[i].l=1*new Date();
+                for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+                k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+            })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=110143282', 'ym');
+
+            ym(110143282, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+          `}
+        </Script>
+        <noscript>
+          <div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="https://mc.yandex.ru/watch/110143282"
+              style={{ position: "absolute", left: "-9999px" }}
+              alt=""
+            />
+          </div>
+        </noscript>
         <StructuredData />
         <div className="site-scale">{children}</div>
       </body>

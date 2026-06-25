@@ -96,7 +96,7 @@ function InfoCard({
               aria-hidden="true"
               width={isHandshakeIcon ? 30 : 22}
               height={isHandshakeIcon ? 30 : 22}
-              priority={isGuarantee}
+              loading="lazy"
               className={
                 isHandshakeIcon
                   ? "h-[24px] w-[24px] object-contain max-sm:h-[20px] max-sm:w-[20px]"
@@ -126,7 +126,7 @@ function InfoCard({
         alt={item.alt}
         width={180}
         height={150}
-        priority={isGuarantee}
+        loading="lazy"
         className={`pointer-events-none absolute object-contain object-right-bottom ${getCardImageClass(item.title)}`}
       />
     </article>
