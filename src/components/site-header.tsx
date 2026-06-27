@@ -21,6 +21,8 @@ export function SiteHeader({ items = navItems }: SiteHeaderProps) {
           <div className="flex items-center gap-[24px] max-md:gap-4">
             <a
               className="inline-flex items-center gap-3 whitespace-nowrap transition hover:text-white max-sm:gap-2"
+              data-metrika-goal="phone_click"
+              data-metrika-params={JSON.stringify({ source: "header" })}
               href="tel:+79612535000"
             >
               <Image
@@ -53,6 +55,8 @@ export function SiteHeader({ items = navItems }: SiteHeaderProps) {
           <div className="flex items-center gap-[24px] max-md:gap-4 max-sm:gap-3">
             <a
               className="inline-flex items-center gap-3 whitespace-nowrap transition hover:text-white max-sm:gap-2"
+              data-metrika-goal="telegram_manager_click"
+              data-metrika-params={JSON.stringify({ source: "header" })}
               href={siteConfig.managerTelegramUrl}
               aria-label="Написать в Telegram"
               rel="noopener noreferrer"
@@ -73,6 +77,8 @@ export function SiteHeader({ items = navItems }: SiteHeaderProps) {
 
             <a
               className="inline-flex items-center gap-3 whitespace-nowrap transition hover:text-white max-sm:gap-2"
+              data-metrika-goal="whatsapp_click"
+              data-metrika-params={JSON.stringify({ source: "header" })}
               href="https://wa.me/79612535000"
               aria-label="Написать в WhatsApp"
               rel="noopener noreferrer"
@@ -109,6 +115,8 @@ export function SiteHeader({ items = navItems }: SiteHeaderProps) {
             {items.map((item) => (
               <a
                 className="text-[20px] font-light transition hover:text-white"
+                data-metrika-goal="section_nav_click"
+                data-metrika-params={JSON.stringify({ section: item.href })}
                 href={item.href}
                 key={item.href}
               >
@@ -119,6 +127,7 @@ export function SiteHeader({ items = navItems }: SiteHeaderProps) {
 
           <CarPickerModal
             buttonClassName="!h-[43px] !gap-[14px] !bg-white px-[26px] !text-[20px] !font-normal !text-ink hover:scale-105 hover:!bg-slate-100 max-[1500px]:!h-[40px] max-[1500px]:!gap-[12px] max-[1500px]:px-[24px] max-[1500px]:!text-[17px] max-[1320px]:px-[22px] max-[1320px]:!text-[16px] max-sm:!h-[34px] max-sm:!gap-2 max-sm:px-4 max-sm:!text-[13px]"
+            goalSource="header"
           >
             <span className="whitespace-nowrap max-sm:hidden">Связаться с нами</span>
             <span className="sm:hidden">Связаться</span>

@@ -10,6 +10,8 @@ export function SiteFooter() {
           <div>
             <a
               className="text-[28px] font-medium uppercase leading-none max-sm:text-[24px]"
+              data-metrika-goal="section_nav_click"
+              data-metrika-params={JSON.stringify({ section: "#top", source: "footer" })}
               href="#top"
             >
               GRAILS IMPORT
@@ -26,6 +28,8 @@ export function SiteFooter() {
               </p>
               <a
                 className="mt-3 block text-[17px] font-light leading-tight transition hover:text-white/70 max-sm:mt-2 max-sm:text-[14px]"
+                data-metrika-goal="phone_click"
+                data-metrika-params={JSON.stringify({ source: "footer" })}
                 href={`tel:${footerPhone.replaceAll(" ", "")}`}
               >
                 {footerPhone}

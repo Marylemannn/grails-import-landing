@@ -5,6 +5,7 @@ import { ChevronRight, X } from "lucide-react";
 import { FormEvent, useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { captureLeadAttribution, getLeadAttribution } from "@/lib/lead-attribution";
+import { metrikaGoals, trackMetrikaGoal } from "@/lib/metrika";
 import telegramIcon from "../../картинки/чернитг.svg";
 import phoneIcon from "../../картинки/чернителефон.svg";
 import whatsappIcon from "../../картинки/чернивотс.svg";
@@ -22,6 +23,7 @@ type ContactMethod = (typeof contactMethods)[number]["id"];
 type CarPickerModalProps = {
   buttonClassName?: string;
   children: React.ReactNode;
+  goalSource?: string;
 };
 
 type ModalPhase = "closed" | "open" | "closing";
@@ -78,6 +80,7 @@ function formatRussianPhone(value: string) {
 export function CarPickerModal({
   buttonClassName = "",
   children,
+  goalSource = "cta",
 }: CarPickerModalProps) {
   const [isMounted, setIsMounted] = useState(false);
   const [modalPhase, setModalPhase] = useState<ModalPhase>("closed");
@@ -124,6 +127,7 @@ export function CarPickerModal({
     setModalPhase("open");
     setSubmitStatus("idle");
     setSubmitMessage("");
+    trackMetrikaGoal(metrikaGoals.leadFormOpen, { source: goalSource });
   };
 
   useEffect(() => {
@@ -184,6 +188,10 @@ export function CarPickerModal({
 
       setSubmitStatus("success");
       setSubmitMessage("Заявка отправлена. Менеджер свяжется с вами выбранным способом.");
+      trackMetrikaGoal(metrikaGoals.leadFormSubmitSuccess, {
+        contactMethod,
+        source: goalSource,
+      });
     } catch (error) {
       setSubmitStatus("error");
       setSubmitMessage(
@@ -279,6 +287,10 @@ export function CarPickerModal({
                       setContactMethod(method.id);
                       setSubmitStatus("idle");
                       setSubmitMessage("");
+                      trackMetrikaGoal(metrikaGoals.contactMethodSelect, {
+                        contactMethod: method.id,
+                        source: goalSource,
+                      });
                     }}
                   >
                     <Image

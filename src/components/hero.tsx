@@ -42,6 +42,7 @@ export function Hero() {
           </p>
           <CarPickerModal
             buttonClassName="mt-[48px] !h-[65px] w-[350px] max-w-full origin-center whitespace-nowrap !rounded-full border border-transparent px-7 !text-[23px] !font-medium hover:scale-105 hover:!border-black hover:!bg-white hover:!text-black max-[1500px]:mt-[40px] max-md:px-7 max-sm:mt-6 max-sm:!h-[46px] max-sm:w-[224px] max-sm:px-5 max-sm:!text-[15px]"
+            goalSource="hero"
           >
             Связаться с нами
           </CarPickerModal>
@@ -66,6 +67,8 @@ export function Hero() {
                     расчет за 1 минуту в{" "}
                     <a
                       className="underline underline-offset-2"
+                      data-metrika-goal="calculator_click"
+                      data-metrika-params={JSON.stringify({ source: "hero_stats" })}
                       href={siteConfig.calculatorTelegramUrl}
                       rel="noopener noreferrer"
                       target="_blank"

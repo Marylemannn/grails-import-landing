@@ -172,6 +172,11 @@ export function CasesSection() {
                     </p>
                     <a
                       className="mt-4 inline-flex items-center gap-2 text-[16px] font-medium leading-none text-white underline-offset-4 transition hover:underline focus:outline-none focus-visible:underline max-sm:text-[18px]"
+                      data-metrika-goal="case_details_click"
+                      data-metrika-params={JSON.stringify({
+                        caseTitle: item.title,
+                        caseDescription: item.description,
+                      })}
                       href={item.href}
                       rel="noopener noreferrer"
                       target="_blank"

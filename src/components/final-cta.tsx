@@ -55,6 +55,8 @@ export function FinalCta() {
             </div>
             <ButtonLink
               className="!h-[65px] w-[320px] max-w-full shrink-0 whitespace-nowrap !rounded-full px-7 !text-[23px] !font-medium transition-transform hover:scale-[1.04] max-sm:!h-[48px] max-sm:w-full max-sm:px-5 max-sm:!text-[16px]"
+              data-metrika-goal="telegram_manager_click"
+              data-metrika-params={JSON.stringify({ source: "final_cta" })}
               href={siteConfig.managerTelegramUrl}
               icon="chevron"
               rel="noopener noreferrer"

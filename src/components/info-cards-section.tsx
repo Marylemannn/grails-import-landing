@@ -34,6 +34,8 @@ function renderCardText(text: string) {
       {before}
       <a
         className="text-inherit"
+        data-metrika-goal="telegram_channel_click"
+        data-metrika-params={JSON.stringify({ source: "guarantee_card" })}
         href="https://t.me/grails_import"
         rel="noopener noreferrer"
         target="_blank"

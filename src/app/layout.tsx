@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import "./globals.css";
 import { siteConfig } from "@/lib/site";
+import { MetrikaGoals } from "@/components/metrika-goals";
 import { StructuredData } from "@/components/structured-data";
 
 export const metadata: Metadata = {
@@ -103,6 +104,7 @@ export default function RootLayout({
             />
           </div>
         </noscript>
+        <MetrikaGoals />
         <StructuredData />
         <div className="site-scale">{children}</div>
       </body>
